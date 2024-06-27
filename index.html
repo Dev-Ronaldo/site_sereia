@@ -2357,6 +2357,96 @@
       });
     }, 5000);
   </script>
+</script>
+  // Resolução dos Exercicios
+
+  // EXERCICIO 1
+
+document.addEventListener('scroll', function () {
+    var alturaAtual = window.scrollY + document.documentElement.clientHeight;
+    var alturaTotal = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+    );
+    var porcentagemScroll = alturaAtual / alturaTotal;
+    if (porcentagemScroll == 1) {
+        console.log('Rolou até o final');
+    }
+});
+
+// Verifica o tamanho total da página com alguns códigos 
+
+//-------------------------------------------------------------------------------------//
+// EXERCICIO 2
+
+const btnOrcamento = document.querySelector('.page-scroll.btn');
+btnOrcamento.addEventListener('click', function () {
+    console.log('Clicou em FAÇA UM ORÇAMENTO');
+});
+
+//-------------------------------------------------------------------------------------//
+// EXERCICIO 3
+
+const popup = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+        console.log('Visualizou FALE COM UM ATENDENTE');
+    }
+});
+popup.observe(document.querySelector('#call-me-baby'));
+
+//-------------------------------------------------------------------------------------//
+// EXERCICIO 4/5
+
+const campos = document.querySelectorAll('.form-control');
+campos.forEach(campo => {
+    campo.addEventListener('change', function(event) {
+        if(!campo.value) return
+        let preenchidos = true;
+        campos.forEach(campo => {
+            if (!campo.value || campo.getAttribute('aria-invalid') === 'true') {
+                preenchidos = false;
+            }
+        });
+        if(campo.getAttribute('aria-invalid') === 'false') {
+            console.log(`Preencheu o campo ${event.target.id}`);
+        }
+        if (preenchidos) {
+            console.log("Todos campos preenchidos");
+        }  
+    });
+});
+
+//Explicação --> declarado o valor de preenchidos em true -> para verificar se tudo está sendo preenchido
+// em (!campo.value || campo.getAttribute('aria-invalid') === 'true') verifica se o campo está vazio ou aria-invalid está como true
+// mantendo preenchidos como false caso esteja invalido
+// if (preenchidos) --> após ver todos campos, se ainda for true ele exibirá o conteúdo do console.log
+// faz um if(!campo.value) return no começo para caso o campo for vazio, nem inicia a verificação do campo
+// caso o aria-invalid seja false ele ja imprime no console que preencheu o campo individualmente.
+
+//-------------------------------------------------------------------------------------//
+// EXERCICIO 6
+
+var itens = document.querySelectorAll("a[href^='#']");
+itens.forEach(itens => {
+    itens.addEventListener('click', function (entries) {
+        console.log(`clicou no menu ${entries.target.innerText}`);  // testei com InnerHTML => resultava com letra minuscula - InnerText retorna texto sem formatação ou elemento html
+    });
+});
+
+//-------------------------------------------------------------------------------------//
+// EXERCICIO 7
+
+const banheiro = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+        console.log('Visualizou o banheiro');
+    }
+});
+banheiro.observe(document.querySelector("[src='images/banheiro.webp']"));
+
+//-------------------------------------------------------------------------------------//
+</script>  
+  
 </body>
 
 </html>
