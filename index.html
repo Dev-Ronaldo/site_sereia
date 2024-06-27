@@ -2360,7 +2360,8 @@
 <script>
   // Resolução dos Exercicios
 
-  // EXERCICIO 1
+//-------------------------------------------------------------------------------------//
+// EXERCICIO 1
 
 document.addEventListener('scroll', function () {
     var alturaAtual = window.scrollY + document.documentElement.clientHeight;
@@ -2408,11 +2409,12 @@ campos.forEach(campo => {
                 preenchidos = false;
             }
         });
-        if(campo.getAttribute('aria-invalid') === 'false') {
+        if(campo.getAttribute('campo-preenchido') !== 'true' && campo.getAttribute('aria-invalid') === 'false')  {
             console.log(`Preencheu o campo ${event.target.id}`);
+            campo.setAttribute('campo-preenchido', 'true');
         }
         if (preenchidos) {
-            console.log("Todos campos preenchidos");
+            console.log("Preencheu todo o formulário");
         }  
     });
 });
@@ -2423,6 +2425,7 @@ campos.forEach(campo => {
 // if (preenchidos) --> após ver todos campos, se ainda for true ele exibirá o conteúdo do console.log
 // faz um if(!campo.value) return no começo para caso o campo for vazio, nem inicia a verificação do campo
 // caso o aria-invalid seja false ele ja imprime no console que preencheu o campo individualmente.
+// usando o setAttribute para criar um atributo de preenchimento, para verificar se o campo ja foi digitado e não disparar novamente no console
 
 //-------------------------------------------------------------------------------------//
 // EXERCICIO 6
