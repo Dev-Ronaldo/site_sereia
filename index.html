@@ -2362,6 +2362,7 @@
 
 // EXERCICIO 1
 
+let rolouFinal = false;
 document.addEventListener('scroll', function () {
     var alturaAtual = window.scrollY + document.documentElement.clientHeight;
     var alturaTotal = Math.max(
@@ -2370,8 +2371,9 @@ document.addEventListener('scroll', function () {
         document.body.clientHeight, document.documentElement.clientHeight
     );
     var porcentagemScroll = alturaAtual / alturaTotal;
-    if (porcentagemScroll == 1) {
+    if (porcentagemScroll == 1 && !rolouFinal) {
         console.log('Rolou até o final');
+        rolouFinal = true;
     }
 });
 
