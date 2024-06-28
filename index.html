@@ -2358,9 +2358,8 @@
     }, 5000);
   </script>
 <script>
-  // Resolução dos Exercicios
+// Resolução dos Exercicios
 
-//-------------------------------------------------------------------------------------//
 // EXERCICIO 1
 
 document.addEventListener('scroll', function () {
@@ -2385,6 +2384,8 @@ const btnOrcamento = document.querySelector('.page-scroll.btn');
 btnOrcamento.addEventListener('click', function () {
     console.log('Clicou em FAÇA UM ORÇAMENTO');
 });
+//undefined caso não exista a tag verificar se existe.
+
 
 //-------------------------------------------------------------------------------------//
 // EXERCICIO 3
@@ -2400,6 +2401,8 @@ popup.observe(document.querySelector('#call-me-baby'));
 // EXERCICIO 4/5
 
 const campos = document.querySelectorAll('.form-control');
+let todosPreenchidos = false;
+
 campos.forEach(campo => {
     campo.addEventListener('change', function(event) {
         if(!campo.value) return
@@ -2413,8 +2416,9 @@ campos.forEach(campo => {
             console.log(`Preencheu o campo ${event.target.id}`);
             campo.setAttribute('campo-preenchido', 'true');
         }
-        if (preenchidos) {
+        if (preenchidos && !todosPreenchidos) {
             console.log("Preencheu todo o formulário");
+            todosPreenchidos = true;
         }  
     });
 });
@@ -2422,10 +2426,10 @@ campos.forEach(campo => {
 //Explicação --> declarado o valor de preenchidos em true -> para verificar se tudo está sendo preenchido
 // em (!campo.value || campo.getAttribute('aria-invalid') === 'true') verifica se o campo está vazio ou aria-invalid está como true
 // mantendo preenchidos como false caso esteja invalido
-// if (preenchidos) --> após ver todos campos, se ainda for true ele exibirá o conteúdo do console.log
-// faz um if(!campo.value) return no começo para caso o campo for vazio, nem inicia a verificação do campo
+// if(!campo.value) return no começo para caso o campo for vazio, nem inicia a verificação do campo
 // caso o aria-invalid seja false ele ja imprime no console que preencheu o campo individualmente.
 // usando o setAttribute para criar um atributo de preenchimento, para verificar se o campo ja foi digitado e não disparar novamente no console
+// if (preenchidos) --> após ver todos campos, se ainda for true ele exibirá o conteúdo do console.log
 
 //-------------------------------------------------------------------------------------//
 // EXERCICIO 6
