@@ -2359,7 +2359,7 @@
   </script>
 <script>
 // Resolução dos Exercicios
-
+//-------------------------------------------------------------------------------------//
 // EXERCICIO 1
 
 let rolouFinal = false;
@@ -2377,17 +2377,13 @@ document.addEventListener('scroll', function () {
     }
 });
 
-// Verifica o tamanho total da página com alguns códigos 
-
 //-------------------------------------------------------------------------------------//
 // EXERCICIO 2
 
 const btnOrcamento = document.querySelector('.page-scroll.btn');
-btnOrcamento.addEventListener('click', function () {
+btnOrcamento?.addEventListener('click', function () {
     console.log('Clicou em FAÇA UM ORÇAMENTO');
 });
-//undefined caso não exista a tag verificar se existe.
-
 
 //-------------------------------------------------------------------------------------//
 // EXERCICIO 3
@@ -2406,7 +2402,7 @@ const campos = document.querySelectorAll('.form-control');
 let todosPreenchidos = false;
 
 campos.forEach(campo => {
-    campo.addEventListener('change', function(event) {
+    campo?.addEventListener('change', function(event) {
         if(!campo.value) return
         let preenchidos = true;
         campos.forEach(campo => {
@@ -2425,20 +2421,12 @@ campos.forEach(campo => {
     });
 });
 
-//Explicação --> declarado o valor de preenchidos em true -> para verificar se tudo está sendo preenchido
-// em (!campo.value || campo.getAttribute('aria-invalid') === 'true') verifica se o campo está vazio ou aria-invalid está como true
-// mantendo preenchidos como false caso esteja invalido
-// if(!campo.value) return no começo para caso o campo for vazio, nem inicia a verificação do campo
-// caso o aria-invalid seja false ele ja imprime no console que preencheu o campo individualmente.
-// usando o setAttribute para criar um atributo de preenchimento, para verificar se o campo ja foi digitado e não disparar novamente no console
-// if (preenchidos) --> após ver todos campos, se ainda for true ele exibirá o conteúdo do console.log
-
 //-------------------------------------------------------------------------------------//
 // EXERCICIO 6
 
 var itens = document.querySelectorAll("a[href^='#']");
 itens.forEach(itens => {
-    itens.addEventListener('click', function (entries) {
+    itens?.addEventListener('click', function (entries) {
         console.log(`clicou no menu ${entries.target.innerText}`);  // testei com InnerHTML => resultava com letra minuscula - InnerText retorna texto sem formatação ou elemento html
     });
 });
