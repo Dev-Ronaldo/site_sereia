@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MMF4Y75FEF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MMF4Y75FEF', { 'debug_mode': true });
+  </script>
+
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -1306,8 +1317,7 @@
   <script src="assets/bootstrap.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="assets/jquery.easing.min.js"
-    crossorigin="anonymous"></script>
+  <script src="assets/jquery.easing.min.js" crossorigin="anonymous"></script>
 
   <script>
     (function ($) {
@@ -2232,7 +2242,6 @@
       };
     })(jQuery);
     $(function () {
-      let shouldFail = false;
       $('#contactForm input,#contactForm textarea').jqBootstrapValidation({
         preventSubmit: true,
         submitError: function ($form, event, errors) {
@@ -2252,9 +2261,7 @@
             firstName = name.split(' ').slice(0, -1).join(' ');
           }
           $.ajax({
-            url: (shouldFail = !shouldFail) // alterna entre falha e sucesso da submissão do contato
-              ? 'https://run.mocky.io/v3/9f2a669c-e0d8-463c-bcb1-ada3004d94e6' // sucesso na submissão
-              : 'https://run.mocky.io/v3/723e9027-4fe2-4697-8198-902e2123d854', // falha na submissão
+            url: 'https://sitesereiaform-am194oys8fmr.runkit.sh/', // notebook em https://runkit.com/lcrespilho/sitesereiaform
             type: 'POST',
             data: {
               name,
@@ -2272,6 +2279,10 @@
                 .append('</button>');
               $('#success > .alert-success').append('<strong>Your message has been sent. </strong>');
               $('#success > .alert-success').append('</div>');
+              // resposta exercicio 4
+              //gtag('event', 'form_send_success');
+              //console.log('formulário enviado');
+              // continua na linha 2304
 
               //clear all fields
               $('#contactForm').trigger('reset');
@@ -2290,6 +2301,9 @@
               $('#success > .alert-danger').append('</div>');
               //clear all fields
               $('#contactForm').trigger('reset');
+              // Resposta exercicio 4
+              //gtag('event','form_send_fail');
+              //console.log('formulário não enviado');
             },
           });
         },
@@ -2357,93 +2371,287 @@
       });
     }, 5000);
   </script>
-<script>
-// Resolução dos Exercicios
-//-------------------------------------------------------------------------------------//
-// EXERCICIO 1
 
-let rolouFinal = false;
-document.addEventListener('scroll', function () {
-    var alturaAtual = window.scrollY + document.documentElement.clientHeight;
-    var alturaTotal = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-    );
-    var porcentagemScroll = alturaAtual / alturaTotal;
-    if (porcentagemScroll == 1 && !rolouFinal) {
-        console.log('Rolou até o final');
-        rolouFinal = true;
-    }
-});
+  <script>
+    // //-------------------------------------------------------------------------------------//
 
-//-------------------------------------------------------------------------------------//
-// EXERCICIO 2
+    // OS EXERCICIOS COMENTADOS A SEGUIR SÃO REFERENTES AOS MODULOS ANTERIORES - Javascript e Tags
 
-const btnOrcamento = document.querySelector('.page-scroll.btn');
-btnOrcamento?.addEventListener('click', function () {
-    console.log('Clicou em FAÇA UM ORÇAMENTO');
-});
+    // EXERCICIOS TAGS / JAVASCRIPT
+    // // EXERCICIO 1
 
-//-------------------------------------------------------------------------------------//
-// EXERCICIO 3
+    // let rolouFinal = false;
+    // document.addEventListener('scroll', function (event) {
+    //   var alturaAtual = window.scrollY + document.documentElement.clientHeight;
+    //   var alturaTotal = Math.max(
+    //     document.body.scrollHeight, document.documentElement.scrollHeight,
+    //     document.body.offsetHeight, document.documentElement.offsetHeight,
+    //     document.body.clientHeight, document.documentElement.clientHeight
+    //   );
+    //   var porcentagemScroll = alturaAtual / alturaTotal;
+    //   if (porcentagemScroll == 1 && !rolouFinal) {
+    //     console.log('Rolou até o final');
+    //     rolouFinal = true;
+    //     gtag('event', 'scroll_end')
+    //   }
+    // });
 
-const popup = new IntersectionObserver((entries) => {
-    if (entries.some((entry) => entry.isIntersecting)) {
-        console.log('Visualizou FALE COM UM ATENDENTE');
-    }
-});
-popup.observe(document.querySelector('#call-me-baby'));
+    // // Verifica o tamanho total da página com alguns códigos já prontos de tamanho
+    // //clientHeight -> retorna altura interna do elemento em pixels.
+    // //offsetHeight -> medidaa que inclui bordas do elemento.
+    // //scrollheight -> medida da altura do conteúdo de um elemento, incluindo conteúdo não visível.
+    // //Math.max vai retornar o maior valor de um desses números. 
 
-//-------------------------------------------------------------------------------------//
-// EXERCICIO 4/5
+    // //-------------------------------------------------------------------------------------//
+    // // EXERCICIO 2
 
-const campos = document.querySelectorAll('.form-control');
-let todosPreenchidos = false;
+    // const btnOrcamento = document.querySelector('.page-scroll.btn');
+    // btnOrcamento?.addEventListener('click', function (event) {
+    //   console.log('Clicou em FAÇA UM ORÇAMENTO');
+    //   gtag('event', 'Clicou em FAÇA UM ORÇAMENTO');
+    // });
+    // //undefined caso não exista a tag verificar se existe.
 
-campos.forEach(campo => {
-    campo?.addEventListener('change', function(event) {
-        if(!campo.value) return
-        let preenchidos = true;
-        campos.forEach(campo => {
-            if (!campo.value || campo.getAttribute('aria-invalid') === 'true') {
-                preenchidos = false;
-            }
-        });
-        if(campo.getAttribute('campo-preenchido') !== 'true' && campo.getAttribute('aria-invalid') === 'false')  {
-            console.log(`Preencheu o campo ${event.target.id}`);
-            campo.setAttribute('campo-preenchido', 'true');
+
+    // //-------------------------------------------------------------------------------------//
+    // // EXERCICIO 3
+
+    // const popup = new IntersectionObserver((entries) => {
+    //   if (entries.some((entry) => entry.isIntersecting)) {
+    //     console.log('Visualizou FALE COM UM ATENDENTE');
+    //     gtag('event', 'view_falecomatendente');
+    //   }
+    // });
+    // popup.observe(document.querySelector('#call-me-baby'));
+
+    // //-------------------------------------------------------------------------------------//
+    // // EXERCICIO 4/5
+
+    // const campos = document.querySelectorAll('.form-control');
+    // let todosPreenchidos = false;
+
+    // campos.forEach(campo => {
+    //   campo?.addEventListener('change', function (event) {
+    //     if (!campo.value) return
+    //     let preenchidos = true;
+    //     campos.forEach(campo => {
+    //       if (!campo.value || campo.getAttribute('aria-invalid') === 'true') {
+    //         preenchidos = false;
+    //       }
+    //     });
+    //     if (campo.getAttribute('campo-preenchido') !== 'true' && campo.getAttribute('aria-invalid') === 'false') {
+    //       console.log(`Preencheu o campo ${event.target.id}`);
+    //       gtag('event', `${event.target.id}_filled`, { 'param': 'value' });
+    //       campo.setAttribute('campo-preenchido', 'true');
+    //     }
+    //     if (preenchidos && !todosPreenchidos) {
+    //       console.log("Preencheu todo o formulário");
+    //       gtag('event', 'all_filled');
+    //       todosPreenchidos = true;
+    //     }
+    //   });
+    // });
+
+    // //Explicação --> declarado o valor de preenchidos em true -> para verificar se tudo está sendo preenchido
+    // // em (!campo.value || campo.getAttribute('aria-invalid') === 'true') verifica se o campo está vazio ou aria-invalid está como true
+    // // mantendo preenchidos como false caso esteja invalido
+    // // if(!campo.value) return no começo para caso o campo for vazio, nem inicia a verificação do campo
+    // // caso o aria-invalid seja false ele ja imprime no console que preencheu o campo individualmente.
+    // // usando o setAttribute para criar um atributo de preenchimento, para verificar se o campo ja foi digitado e não disparar novamente no console
+    // // if (preenchidos) --> após ver todos campos, se ainda for true ele exibirá o conteúdo do console.log
+
+    // //-------------------------------------------------------------------------------------//
+    // // EXERCICIO 6
+
+    // var itens = document.querySelectorAll("nav#mainNav .navbar-right");
+    // itens.forEach(itens => {
+    //   itens?.addEventListener('click', function (event) {
+    //     console.log(`clicou no menu ${event.target.innerText}`);  // InnerText retorna texto sem formatação ou elemento html
+    //     gtag('event', 'click_topmenu');
+    //   });
+    // });
+
+    // //-------------------------------------------------------------------------------------//
+    // // EXERCICIO 7
+
+    // const banheiro = new IntersectionObserver((entries) => {
+    //   if (entries.some((entry) => entry.isIntersecting)) {
+    //     console.log('Visualizou o banheiro');
+    //     gtag('event', 'view_imgbanheiro');
+    //   }
+    // });
+    // banheiro.observe(document.querySelector("[src='images/banheiro.webp']"));
+
+    //-------------------------------------------------------------------------------------//
+
+    // EXERCICIOS HARDCODED ---- VERIFICAR A PARTIR DAQUI ----
+    // Exercicio 1
+    (function () {
+      let rolouFinal = false;
+      document.addEventListener('scroll', function (event) {
+        var alturaAtual = window.scrollY + document.documentElement.clientHeight;
+        var alturaTotal = Math.max(
+          document.body.scrollHeight, document.documentElement.scrollHeight,
+          document.body.offsetHeight, document.documentElement.offsetHeight,
+          document.body.clientHeight, document.documentElement.clientHeight
+        );
+        var porcentagemScroll = alturaAtual / alturaTotal;
+        if (porcentagemScroll == 1 && !rolouFinal) {
+          console.log('Rolou até o final');
+          rolouFinal = true;
+          gtag('event', 'full_scrolled')
         }
-        if (preenchidos && !todosPreenchidos) {
+      });
+    })();
+
+    // Exercicio 2
+    (function () {
+      //let visForms = false;     adicionar itens comentados nesse exercicios caso for necessário disparar uma unica vez
+      const verForms = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {  // adicionar na condicional --> && !visForms 
+          console.log('Visualizou o formulário');
+          //visForms = true;
+          gtag('event', 'view_contact_form');
+        }
+      });
+      verForms.observe(document.querySelector("#contactForm"));
+
+    })();
+
+    // Exercicio 3
+    (function () {
+      const campos = document.querySelectorAll('.form-control');
+      let todosPreenchidos = false;
+      let formularioIniciado = false;
+      let primeiroCampo = null;
+
+      campos.forEach(campo => {
+        campo?.addEventListener('change', function (event) {
+          if (!campo.value) return
+
+          if (!formularioIniciado) {
+            formularioIniciado = true;
+          }
+
+          let preenchidos = true;
+          campos.forEach(campo => {
+            if (!campo.value || campo.getAttribute('aria-invalid') === 'true') {
+              preenchidos = false;
+            }
+          });
+          if (campo.getAttribute('campo-preenchido') !== 'true' && campo.getAttribute('aria-invalid') === 'false') {
+            console.log(`Preencheu o campo ${event.target.id}`);
+            //gtag('event', `${event.target.id}_filled`, { 'param': 'value' });
+            campo.setAttribute('campo-preenchido', 'true');
+
+            if (!primeiroCampo) {    // VERIFICAR AQUI
+              console.log(`O primeiro campo preenchido foi: ${event.target.id}`);
+              gtag('event', `input_start_${event.target.id}`)
+              primeiroCampo = event.target.id;
+            }
+          }
+          if (preenchidos && !todosPreenchidos) {
             console.log("Preencheu todo o formulário");
+            //gtag('event', 'all_filled');
             todosPreenchidos = true;
-        }  
-    });
-});
+          }
+        });
+      });
 
-//-------------------------------------------------------------------------------------//
-// EXERCICIO 6
+    })();
 
-var itens = document.querySelectorAll("a[href^='#']");
-itens.forEach(itens => {
-    itens?.addEventListener('click', function (entries) {
-        console.log(`clicou no menu ${entries.target.innerText}`);  // testei com InnerHTML => resultava com letra minuscula - InnerText retorna texto sem formatação ou elemento html
-    });
-});
+    // Exercicio 4  --> linhas 2283 e 2304 há uma segunda solução adicionada como comentários  << --
+    (function () {
 
-//-------------------------------------------------------------------------------------//
-// EXERCICIO 7
+      const formulario = document.getElementById('success');
 
-const banheiro = new IntersectionObserver((entries) => {
-    if (entries.some((entry) => entry.isIntersecting)) {
-        console.log('Visualizou o banheiro');
-    }
-});
-banheiro.observe(document.querySelector("[src='images/banheiro.webp']"));
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+          mutation.addedNodes.forEach(node => {
+            if (node.classList.contains('alert-success')) {
+              console.log('formulário enviado com sucesso');
+              gtag('event', 'sendForm_success')
+            }
+            else if (node.classList.contains('alert-danger')) {
+              console.log('falha ao enviar formulário');
+              gtag('event', 'sendForm_fail')
+            }
+          })
+        })
+      })
+      observer.observe(formulario, { childList: true });
 
-//-------------------------------------------------------------------------------------//
-</script>  
-  
+    })();
+
+
+    // Exercicio 5
+
+    (function () {
+
+      var itens = document.querySelectorAll("nav#mainNav .navbar-right");
+      const handleClick = function (event) {
+        console.log(`Clicou no menu ${event.target.innerText}`);
+        gtag('event', 'click_top_menu');
+      }
+      itens.forEach(item => {
+        item.addEventListener('click', handleClick);
+      });
+
+    })();
+
+    // Exercicio 6
+
+    (function () {
+
+      var socialsDev = document.querySelectorAll(".team-member .list-inline.social-buttons li a");
+      const clickSocialDev = function (event) {
+        const regex = /fa-(\w+)/;
+        console.log(`Clicou na rede social ${event.currentTarget.querySelector('i').className.match(regex)[1]}`);
+        console.log("clicou na rede do dev");
+        gtag('event', 'social_media_click_dev');
+        gtag('event', `click_${event.currentTarget.querySelector('i').className.match(regex)[1]}`);
+
+      }
+      socialsDev.forEach(item => {
+        item.addEventListener('click', clickSocialDev);
+      });
+
+      var socialsFooter = document.querySelectorAll("footer .container .row .col-md-4 .list-inline.social-buttons li a");
+      const clickSocialFooter = function (event) {
+        const regex = /fa-(\w+)/;
+        console.log(`Clicou na rede social ${event.currentTarget.querySelector('i').className.match(regex)[1]}`);
+        console.log("clicou na rede do footer");
+        gtag('event', 'social_media_click_footer');
+        gtag('event', `click_${event.currentTarget.querySelector('i').className.match(regex)[1]}`)
+
+      }
+      socialsFooter.forEach(item => {
+        item.addEventListener('click', clickSocialFooter);
+      });
+
+    })();
+
+    // Exercicio 7
+
+    setTimeout(function () {
+      console.log('ficou pelo menos 60 segundos na página');
+      gtag('event', 'engagement_time_60')
+    }, 60000);
+
+    // Exercicio 8
+
+    (function () {
+      const popup = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          console.log('Visualizou FALE COM UM ATENDENTE');
+          gtag('event', 'displayed_talk_to_attendant');
+        }
+      });
+      popup.observe(document.querySelector('#call-me-baby'));
+
+    })();
+
+  </script>
 </body>
 
 </html>
